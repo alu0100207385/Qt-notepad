@@ -5,6 +5,7 @@
 
 //Esta clase permite permite crear texto plano en una ventana
 #include <QPlainTextEdit>
+#include <QTextEdit>
 
 //Introducimos las librerias de los menus
 #include <QMenu>
@@ -51,7 +52,8 @@ public:
 
 //Por convenio, las var privadas acaban en guion bajo (_)
 private:
-    QPlainTextEdit* txtEditor_;
+//    QPlainTextEdit* txtEditor_;
+    QTextEdit* txtEditor_;
 
     //Variables de menu
     QMenu* mnuArchivo_;

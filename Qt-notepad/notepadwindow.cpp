@@ -10,7 +10,8 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     this->setWindowTitle(tr("Super editor de texto"));
 
     //Instanciamos en la var
-    txtEditor_ = new QPlainTextEdit(this);
+//    txtEditor_ = new QPlainTextEdit(this);
+    txtEditor_ = new QTextEdit(this);
     //No hay necesidad de librar memoria, Qt lo hace por nosotros
 
     //Colocas en el centro lo q hemos creado
@@ -127,8 +128,7 @@ NotepadWindow::NotepadWindow(QWidget *parent)
 
     actToolBarCursiva_ = new QAction(tr("Cursiva"),this);
     mnuToolBar_->addAction(actToolBarCursiva_);
-    connect(actToolBarCursiva_, SIGNAL(triggered()), txtEditor_, SLOT(alCursiva()));
-
+    connect(actToolBarCursiva_, SIGNAL(triggered()), this, SLOT(alCursiva()));
 }
 
 NotepadWindow::~NotepadWindow()
@@ -205,7 +205,8 @@ void NotepadWindow::alGuardar()
         if (archivo.open(QFile::WriteOnly | QFile::Truncate))
         {
             //Si se pudo abrir el archivo, escribimos el contenido del editor
-            archivo.write(txtEditor_->toPlainText().toUtf8());
+            archivo.write(txtEditor_->toHtml().toUtf8());
+//            archivo.write(txtEditor_->toPlainText().toUtf8());
 
             //Se cierra el fichero
             archivo.close();
@@ -227,11 +228,13 @@ void NotepadWindow::alFuente()
 
 void NotepadWindow::alCursiva()
 {
+
     QTextEdit* aux;
     aux = new QTextEdit(this);
     aux->setFontItalic(true);
+
 /*    bool ok=true;
-    QFont font = QFontDialog::getFont(xt&ok, txtEditor_->font(), this);
+    QFont font = QFontDialog::getFont(&ok, txtEditor_->font(), this);
     txtEditor_->setItalic(font);
     //txtEditor_->setFont(QFontDialog::getFont(0, txtEditor_->font()));
     */
@@ -240,9 +243,9 @@ void NotepadWindow::alCursiva()
 void NotepadWindow::alAcercaDe()
 {
     QMessageBox msg(this);
-    msg.setWindowTitle(tr("Acerca de"));
-    msg.setInformativeText("NotePad's Aaron (in Qt!) v 1.0");
-    msg.addButton("Aceptar",QMessageBox::AcceptRole);
+//    msg.setWindowTitle(tr("Acerca de"));
+    msg.setText("<p>NotePad's Aaron (in Qt!)</p><p>v 1.0</p>");
+//    msg.addButton("Aceptar",QMessageBox::AcceptRole);
 
     if (msg.exec())
         close();
