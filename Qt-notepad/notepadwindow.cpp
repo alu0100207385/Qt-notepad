@@ -3,9 +3,8 @@
 NotepadWindow::NotepadWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-
     //Establecemos el tamaño inicial de la ventana
-     this->setGeometry(30, 30, 800, 600);
+    this->setGeometry(30, 30, 800, 600);
 
     //Establecemos el título de la ventana
     this->setWindowTitle(tr("Super editor de texto"));
@@ -17,13 +16,13 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     //Colocas en el centro lo q hemos creado
     setCentralWidget(txtEditor_);
 
-    //Inicializamos los menus
-    mainMenu_= new QMenuBar(this);
-
     //Constructor QMenu(cad d txt q va a mostrar, padre)
     //tr traduce esa cad de txt al idioma deseado
     //El & marca el guion bajo, por ej, &Editar, pone el guion bajo la E
     mnuArchivo_= new QMenu(tr("&Archivo"),this);
+
+    //Inicializamos los menus
+    mainMenu_= new QMenuBar(this);
 
     //-> pq es un puntero
     mainMenu_->addMenu(mnuArchivo_);
@@ -49,18 +48,6 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     mnuEditar_ = new QMenu(tr("&Editar"));
     mainMenu_->addMenu(mnuEditar_);
 
-    actEditarCopiar_ = new QAction(tr("&Copiar"), this);
-    actEditarCopiar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_C));
-    mnuEditar_->addAction(actEditarCopiar_);
-
-    actEditarCortar_ = new QAction(tr("&Cortar"), this);
-    actEditarCortar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_X));
-    mnuEditar_->addAction(actEditarCortar_);
-
-    actEditarPegar_ = new QAction(tr("&Pegar"), this);
-    actEditarPegar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_V));
-    mnuEditar_->addAction(actEditarPegar_);
-
     actEditarDeshacer_ = new QAction(tr("&Deshacer"), this);
     actEditarDeshacer_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
     mnuEditar_->addAction(actEditarDeshacer_);
@@ -69,11 +56,24 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     actEditarRehacer_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
     mnuEditar_->addAction(actEditarRehacer_);
 
+    actEditarCortar_ = new QAction(tr("&Cortar"), this);
+    actEditarCortar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_X));
+    mnuEditar_->addAction(actEditarCortar_);
+
+    actEditarCopiar_ = new QAction(tr("&Copiar"), this);
+    actEditarCopiar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_C));
+    mnuEditar_->addAction(actEditarCopiar_);
+
+    actEditarPegar_ = new QAction(tr("&Pegar"), this);
+    actEditarPegar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_V));
+    mnuEditar_->addAction(actEditarPegar_);
+
     //Submenu Formato
     mnuFormato_ = new QMenu(tr("&Formato"));
     mainMenu_->addMenu(mnuFormato_);
 
-    actFormatoFuente_ = new QAction(tr("&Fuente"), this);
+    actFormatoFuente_ = new QAction(tr("F&uente"), this);
+    actFormatoFuente_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_U));
     mnuFormato_->addAction(actFormatoFuente_);
 
     //Submenu ayuda
@@ -96,6 +96,23 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     connect(actFormatoFuente_, SIGNAL(triggered()), this, SLOT(alFuente()));
     connect(actAyudaAcerca_, SIGNAL(triggered()), this, SLOT(alAcercaDe()));
 
+
+
+    //Inicializamos el ToolBar
+    mnuToolBar_ = new QToolBar(this);
+    mnuToolBar_->setWindowTitle("ToolBar");
+    mnuToolBar_->addAction("Abrir");
+    mnuToolBar_->addAction("Copiar");
+    mnuToolBar_->addAction("Cortar");
+    mnuToolBar_->addAction("Pegar");
+    mnuToolBar_->addAction("Fuente");
+    addToolBar(mnuToolBar_);
+
+    //ToolBar: abrir
+    actToolBarAbrir_ = new QAction(QIcon(":/new/prefix1/libreoffice-oasis-presentation-template.png"),tr("&Abrir"),this);
+//    actToolBarAbrir_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
+    mnuToolBar_->addAction(actToolBarAbrir_);
+    connect(actToolBarAbrir_, SIGNAL(triggered()), this, SLOT(alAbrir()));
 }
 
 NotepadWindow::~NotepadWindow()
@@ -118,6 +135,9 @@ NotepadWindow::~NotepadWindow()
     actAyudaAcerca_->deleteLater();
 
     txtEditor_->deleteLater();
+
+    mnuToolBar_->deleteLater();
+    actToolBarAbrir_->deleteLater();
 }
 
 
@@ -187,8 +207,8 @@ void NotepadWindow::alFuente()
 void NotepadWindow::alAcercaDe()
 {
     QMessageBox msg(this);
-    msg.setWindowTitle(tr("Documentacion"));
-
+    msg.setWindowTitle(tr("Acerca de"));
+    msg.setInformativeText("NotePad's Aaron (in Qt!) v 1.0");
     msg.addButton("Aceptar",QMessageBox::AcceptRole);
 
     if (msg.exec())
@@ -199,12 +219,12 @@ void NotepadWindow::alAcercaDe()
 void NotepadWindow::alSalir()
 {
     QMessageBox msg(this);
+    msg.setInformativeText("¿Esta seguro de salir?");
     msg.addButton("Si",QMessageBox::YesRole);
     msg.addButton("No",QMessageBox::NoRole);
 
     if (!msg.exec())
         close();
-
     //Muestra el valor de salida
 //    qDebug() << msg.exec();
 }

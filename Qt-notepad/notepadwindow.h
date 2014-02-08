@@ -10,12 +10,14 @@
 #include <QMenu>
 #include <QMenuBar>
 
+//Menu: ToolBar
+#include <QToolBar>
+
 //Acciones
 #include <QAction>
 
 //Permite abrir archivos (cadenas)
 #include <QFileDialog>
-
 
 #include <QFile>
 #include <QFontDialog>
@@ -60,6 +62,7 @@ private:
 
     QMenu* mnuFormato_;
     QAction* actFormatoFuente_;
+
     QMenu* mnuEditar_;
     QAction* actEditarCopiar_;
     QAction* actEditarPegar_;
@@ -71,6 +74,15 @@ private:
     QAction* actAyudaAcerca_;
 
     QClipboard * portapapeles_;
+
+    //Variables del Toolbar
+    QToolBar* mnuToolBar_;
+    QAction* actToolBarAbrir_;
+/*    QAction* actToolBarCortar_;
+    QAction* actToolBarCopiar_;
+    QAction* actToolBarPegar_;
+    QAction* actToolBarFuente_;
+    */
 };
 
 #endif // NOTEPADWINDOW_H
