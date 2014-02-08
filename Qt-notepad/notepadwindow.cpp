@@ -172,31 +172,6 @@ void NotepadWindow::alGuardar()
 }
 
 
-void NotepadWindow::alAcercaDe()
-{
-    QMessageBox msg;
-    msg.setWindowTitle(tr("Estas en la ayuda"));
-    //setCentralWidget(msg);
-    msg.addButton("Aceptar",QMessageBox::AcceptRole);
-
-    if (msg.exec())
-        close();
-}
-
-
-void NotepadWindow::alSalir()
-{
-    QMessageBox msg;
-    msg.addButton("Si",QMessageBox::YesRole);
-    msg.addButton("No",QMessageBox::NoRole);
-
-    if (!msg.exec())
-        close();
-
-    //Muestra el valor de salida
-//    qDebug() << msg.exec();
-}
-
 void NotepadWindow::alFuente()
 {
     bool ok;
@@ -207,4 +182,32 @@ void NotepadWindow::alFuente()
         txtEditor_->setFont(font);
     }
 }
+
+
+void NotepadWindow::alAcercaDe()
+{
+    QMessageBox msg(this);
+    msg.setWindowTitle(tr("Documentacion"));
+
+    msg.addButton("Aceptar",QMessageBox::AcceptRole);
+
+    if (msg.exec())
+        close();
+}
+
+
+void NotepadWindow::alSalir()
+{
+    QMessageBox msg(this);
+    msg.addButton("Si",QMessageBox::YesRole);
+    msg.addButton("No",QMessageBox::NoRole);
+
+    if (!msg.exec())
+        close();
+
+    //Muestra el valor de salida
+//    qDebug() << msg.exec();
+}
+
+
 
