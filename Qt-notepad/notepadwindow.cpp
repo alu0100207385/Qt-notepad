@@ -32,7 +32,7 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     setMenuBar(mainMenu_);
 
     //Instanciamos una var para abrir
-    actArchivoAbrir_ = new QAction(tr("&Abrir"),this);
+    actArchivoAbrir_ = new QAction(QIcon(":/new/prefix1/libreoffice-oasis-presentation-template.png"),tr("&Abrir"),this);
     actArchivoAbrir_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     mnuArchivo_->addAction(actArchivoAbrir_);
 
@@ -41,6 +41,11 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     actArchivoGuardar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_G));
     mnuArchivo_->addAction(actArchivoGuardar_);
 
+    actArchivoSalir_ = new QAction(tr("&Salir"),this);
+    actArchivoSalir_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
+    mnuArchivo_->addAction(actArchivoSalir_);
+
+    //Submenu Editar
     mnuEditar_ = new QMenu(tr("&Editar"));
     mainMenu_->addMenu(mnuEditar_);
 
@@ -48,23 +53,48 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     actEditarCopiar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_C));
     mnuEditar_->addAction(actEditarCopiar_);
 
+    actEditarCortar_ = new QAction(tr("&Cortar"), this);
+    actEditarCortar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_X));
+    mnuEditar_->addAction(actEditarCortar_);
+
     actEditarPegar_ = new QAction(tr("&Pegar"), this);
     actEditarPegar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_V));
     mnuEditar_->addAction(actEditarPegar_);
 
+    actEditarDeshacer_ = new QAction(tr("&Deshacer"), this);
+    actEditarDeshacer_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
+    mnuEditar_->addAction(actEditarDeshacer_);
+
+    actEditarRehacer_ = new QAction(tr("&Rehacer"), this);
+    actEditarRehacer_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
+    mnuEditar_->addAction(actEditarRehacer_);
+
+    //Submenu Formato
     mnuFormato_ = new QMenu(tr("&Formato"));
     mainMenu_->addMenu(mnuFormato_);
 
     actFormatoFuente_ = new QAction(tr("&Fuente"), this);
     mnuFormato_->addAction(actFormatoFuente_);
 
+    //Submenu ayuda
+    mnuAyuda_ = new QMenu(tr("A&yuda"));
+    mainMenu_->addMenu(mnuAyuda_);
+
+    actAyudaAcerca_ = new QAction(tr("Acerca de"), this);
+    actAyudaAcerca_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_F1));
+    mnuAyuda_->addAction(actAyudaAcerca_);
+
     //Conectamos las acciones de los menus con nuestros slots (funciones)
     connect(actArchivoAbrir_, SIGNAL(triggered()),this,SLOT(alAbrir()));
     connect(actArchivoGuardar_, SIGNAL(triggered()),this,SLOT(alGuardar()));
+    connect(actArchivoSalir_, SIGNAL(triggered()),this,SLOT(alSalir()));
     connect(actEditarCopiar_, SIGNAL(triggered()), txtEditor_, SLOT(copy()));
     connect(actEditarPegar_, SIGNAL(triggered()), txtEditor_, SLOT(paste()));
+    connect(actEditarCortar_, SIGNAL(triggered()), txtEditor_, SLOT(cut()));
+    connect(actEditarDeshacer_, SIGNAL(triggered()), txtEditor_, SLOT(undo()));
+    connect(actEditarRehacer_, SIGNAL(triggered()), txtEditor_, SLOT(redo()));
     connect(actFormatoFuente_, SIGNAL(triggered()), this, SLOT(alFuente()));
-
+    connect(actAyudaAcerca_, SIGNAL(triggered()), this, SLOT(alAcercaDe()));
 
 }
 
@@ -74,12 +104,19 @@ NotepadWindow::~NotepadWindow()
     mainMenu_->deleteLater();
     actArchivoAbrir_->deleteLater();
     actArchivoGuardar_->deleteLater();
+    actArchivoSalir_->deleteLater();
     mnuArchivo_->deleteLater();
     actEditarCopiar_->deleteLater();
     actEditarPegar_->deleteLater();
+    actEditarDeshacer_->deleteLater();
+    actEditarRehacer_->deleteLater();
     mnuEditar_->deleteLater();
     actFormatoFuente_->deleteLater();
     mnuFormato_->deleteLater();
+
+    mnuAyuda_->deleteLater();
+    actAyudaAcerca_->deleteLater();
+
     txtEditor_->deleteLater();
 }
 
@@ -122,6 +159,7 @@ void NotepadWindow::alGuardar()
         //Intentamos abrir el archivo
         QFile archivo;
         archivo.setFileName(nombreArchivo + ".txt");
+//        QImage img(":/new/prefix1/libreoffice-oasis-presentation-template.png");
         if (archivo.open(QFile::WriteOnly | QFile::Truncate))
         {
             //Si se pudo abrir el archivo, escribimos el contenido del editor
@@ -131,6 +169,32 @@ void NotepadWindow::alGuardar()
             archivo.close();
         }
     }
+}
+
+
+void NotepadWindow::alAcercaDe()
+{
+    QMessageBox msg;
+    msg.setWindowTitle(tr("Estas en la ayuda"));
+    //setCentralWidget(msg);
+    msg.addButton("Aceptar",QMessageBox::AcceptRole);
+
+    if (msg.exec())
+        close();
+}
+
+
+void NotepadWindow::alSalir()
+{
+    QMessageBox msg;
+    msg.addButton("Si",QMessageBox::YesRole);
+    msg.addButton("No",QMessageBox::NoRole);
+
+    if (!msg.exec())
+        close();
+
+    //Muestra el valor de salida
+//    qDebug() << msg.exec();
 }
 
 void NotepadWindow::alFuente()

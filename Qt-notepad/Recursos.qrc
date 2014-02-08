@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>libreoffice-oasis-presentation-template.png</file>
+    </qresource>
+</RCC>

@@ -22,6 +22,11 @@
 #include <QClipboard>
 #include <QKeySequence>
 
+//Lo utilizamos cm ventana emergente
+#include <QMessageBox>
+
+//COntrol debug: controlar valores de salida
+#include <QDebug>
 
 class NotepadWindow : public QMainWindow
 {
@@ -33,6 +38,8 @@ private slots:
     void alAbrir();
     void alGuardar();
     void alFuente();
+    void alAcercaDe();
+    void alSalir();
 
 public:
     NotepadWindow(QWidget *parent = 0);
@@ -49,12 +56,20 @@ private:
     //Var de accion
     QAction* actArchivoAbrir_;
     QAction* actArchivoGuardar_;
+    QAction* actArchivoSalir_;
 
     QMenu* mnuFormato_;
     QAction* actFormatoFuente_;
     QMenu* mnuEditar_;
     QAction* actEditarCopiar_;
     QAction* actEditarPegar_;
+    QAction* actEditarCortar_;
+    QAction* actEditarDeshacer_;
+    QAction* actEditarRehacer_;
+
+    QMenu* mnuAyuda_;
+    QAction* actAyudaAcerca_;
+
     QClipboard * portapapeles_;
 };
 
