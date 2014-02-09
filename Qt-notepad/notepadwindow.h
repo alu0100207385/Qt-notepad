@@ -78,11 +78,10 @@ private:
     //Variables del Toolbar
     QToolBar* mnuToolBar_;
     QAction* actToolBarAbrir_;
-/*    QAction* actToolBarCortar_;
+    QAction* actToolBarCortar_;
     QAction* actToolBarCopiar_;
     QAction* actToolBarPegar_;
     QAction* actToolBarFuente_;
-    */
 };
 
 #endif // NOTEPADWINDOW_H

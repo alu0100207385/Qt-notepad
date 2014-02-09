@@ -581,6 +581,8 @@ moc_notepadwindow.cpp: ../../Qt/5.2.0/gcc/include/QtWidgets/QMainWindow \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qactiongroup.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QMenuBar \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qmenubar.h \
+		../../Qt/5.2.0/gcc/include/QtWidgets/QToolBar \
+		../../Qt/5.2.0/gcc/include/QtWidgets/qtoolbar.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QAction \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QFileDialog \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qfiledialog.h \
@@ -746,6 +748,8 @@ main.o: Qt-notepad/main.cpp Qt-notepad/notepadwindow.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qactiongroup.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QMenuBar \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qmenubar.h \
+		../../Qt/5.2.0/gcc/include/QtWidgets/QToolBar \
+		../../Qt/5.2.0/gcc/include/QtWidgets/qtoolbar.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QAction \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QFileDialog \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qfiledialog.h \
@@ -903,6 +907,8 @@ notepadwindow.o: Qt-notepad/notepadwindow.cpp Qt-notepad/notepadwindow.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qactiongroup.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QMenuBar \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qmenubar.h \
+		../../Qt/5.2.0/gcc/include/QtWidgets/QToolBar \
+		../../Qt/5.2.0/gcc/include/QtWidgets/qtoolbar.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QAction \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QFileDialog \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qfiledialog.h \

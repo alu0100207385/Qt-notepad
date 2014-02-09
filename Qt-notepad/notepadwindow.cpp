@@ -100,19 +100,30 @@ NotepadWindow::NotepadWindow(QWidget *parent)
 
     //Inicializamos el ToolBar
     mnuToolBar_ = new QToolBar(this);
-    mnuToolBar_->setWindowTitle("ToolBar");
-    mnuToolBar_->addAction("Abrir");
-    mnuToolBar_->addAction("Copiar");
-    mnuToolBar_->addAction("Cortar");
-    mnuToolBar_->addAction("Pegar");
-    mnuToolBar_->addAction("Fuente");
+    mnuToolBar_->setWindowTitle("My super ToolBar");
     addToolBar(mnuToolBar_);
 
-    //ToolBar: abrir
-    actToolBarAbrir_ = new QAction(QIcon(":/new/prefix1/libreoffice-oasis-presentation-template.png"),tr("&Abrir"),this);
-//    actToolBarAbrir_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
+    //TOOLBAR
+    actToolBarAbrir_ = new QAction(tr("Abrir"),this);
     mnuToolBar_->addAction(actToolBarAbrir_);
     connect(actToolBarAbrir_, SIGNAL(triggered()), this, SLOT(alAbrir()));
+
+    actToolBarCopiar_ = new QAction(tr("Copiar"),this);
+    mnuToolBar_->addAction(actToolBarCopiar_);
+    connect(actToolBarCopiar_, SIGNAL(triggered()), txtEditor_, SLOT(copy()));
+
+    actToolBarCortar_ = new QAction(tr("Cortar"),this);
+    mnuToolBar_->addAction(actToolBarCortar_);
+    connect(actToolBarCortar_, SIGNAL(triggered()), txtEditor_, SLOT(cut()));
+
+    actToolBarPegar_ = new QAction(tr("Pegar"),this);
+    mnuToolBar_->addAction(actToolBarPegar_);
+    connect(actToolBarPegar_, SIGNAL(triggered()), txtEditor_, SLOT(paste()));
+
+    actToolBarFuente_ = new QAction(tr("Fuente"),this);
+    mnuToolBar_->addAction(actToolBarFuente_);
+    connect(actToolBarFuente_, SIGNAL(triggered()), this, SLOT(alFuente()));
+
 }
 
 NotepadWindow::~NotepadWindow()
