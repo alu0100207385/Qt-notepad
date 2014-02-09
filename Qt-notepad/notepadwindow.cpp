@@ -31,7 +31,7 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     setMenuBar(mainMenu_);
 
     //Instanciamos una var para abrir
-    actArchivoAbrir_ = new QAction(QIcon(":/new/prefix1/libreoffice-oasis-presentation-template.png"),tr("&Abrir"),this);
+    actArchivoAbrir_ = new QAction(QIcon(":/new/prefix1/libreoffice-main.png"),tr("&Abrir"),this);
     actArchivoAbrir_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     mnuArchivo_->addAction(actArchivoAbrir_);
 
@@ -72,11 +72,11 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     mnuFormato_ = new QMenu(tr("&Formato"));
     mainMenu_->addMenu(mnuFormato_);
 
-    actFormatoFuente_ = new QAction(tr("F&uente"), this);
+    actFormatoFuente_ = new QAction(QIcon(":/new/prefix1/preferences-desktop-font.png"),tr("F&uente"), this);
     actFormatoFuente_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_U));
     mnuFormato_->addAction(actFormatoFuente_);
 
-    //Submenu ayuda
+    //Submenu Ayuda
     mnuAyuda_ = new QMenu(tr("A&yuda"));
     mainMenu_->addMenu(mnuAyuda_);
 
@@ -120,9 +120,14 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     mnuToolBar_->addAction(actToolBarPegar_);
     connect(actToolBarPegar_, SIGNAL(triggered()), txtEditor_, SLOT(paste()));
 
-    actToolBarFuente_ = new QAction(tr("Fuente"),this);
+//    actToolBarFuente_ = new QAction(tr("Fuente"),this);
+    actToolBarFuente_ = new QAction(QIcon(":/new/prefix1/preferences-desktop-font.png"),tr("Fuente"),this);
     mnuToolBar_->addAction(actToolBarFuente_);
     connect(actToolBarFuente_, SIGNAL(triggered()), this, SLOT(alFuente()));
+
+    actToolBarCursiva_ = new QAction(tr("Cursiva"),this);
+    mnuToolBar_->addAction(actToolBarCursiva_);
+    connect(actToolBarCursiva_, SIGNAL(triggered()), txtEditor_, SLOT(alCursiva()));
 
 }
 
@@ -149,6 +154,12 @@ NotepadWindow::~NotepadWindow()
 
     mnuToolBar_->deleteLater();
     actToolBarAbrir_->deleteLater();
+    actToolBarCopiar_->deleteLater();
+    actToolBarCortar_->deleteLater();
+    actToolBarPegar_->deleteLater();
+    actToolBarFuente_->deleteLater();
+
+    actToolBarCursiva_->deleteLater();
 }
 
 
@@ -214,6 +225,10 @@ void NotepadWindow::alFuente()
     }
 }
 
+void NotepadWindow::alCursiva()
+{
+    txtEditor_->setFont(QFontDialog::getFont(0, txtEditor_->font()));
+}
 
 void NotepadWindow::alAcercaDe()
 {

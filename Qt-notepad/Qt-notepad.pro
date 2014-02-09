@@ -21,5 +21,4 @@ HEADERS  += notepadwindow.h
 RESOURCES += \
     Recursos.qrc
 
-OTHER_FILES += \
-    ../../../../../usr/share/icons/gnome/256x256/apps/libreoffice-main.png
+OTHER_FILES +=

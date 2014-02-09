@@ -21,6 +21,7 @@
 
 #include <QFile>
 #include <QFontDialog>
+//#include <QFont>
 #include <QClipboard>
 #include <QKeySequence>
 
@@ -42,6 +43,7 @@ private slots:
     void alFuente();
     void alAcercaDe();
     void alSalir();
+    void alCursiva();
 
 public:
     NotepadWindow(QWidget *parent = 0);
@@ -82,6 +84,8 @@ private:
     QAction* actToolBarCopiar_;
     QAction* actToolBarPegar_;
     QAction* actToolBarFuente_;
+
+    QAction* actToolBarCursiva_;
 };
 
 #endif // NOTEPADWINDOW_H

@@ -443,7 +443,9 @@ compiler_rcc_make_all: qrc_Recursos.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_Recursos.cpp
 qrc_Recursos.cpp: Qt-notepad/Recursos.qrc \
-		Qt-notepad/libreoffice-oasis-presentation-template.png
+		Qt-notepad/libreoffice-main.png \
+		Qt-notepad/libreoffice-oasis-presentation-template.png \
+		Qt-notepad/preferences-desktop-font.png
 	/home/aaron/Qt/5.2.0/gcc/bin/rcc -name Recursos Qt-notepad/Recursos.qrc -o qrc_Recursos.cpp
 
 compiler_moc_header_make_all: moc_notepadwindow.cpp
