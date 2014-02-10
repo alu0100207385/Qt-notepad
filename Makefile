@@ -443,9 +443,17 @@ compiler_rcc_make_all: qrc_Recursos.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_Recursos.cpp
 qrc_Recursos.cpp: Qt-notepad/Recursos.qrc \
+		Qt-notepad/Folder-Open-icon.png \
+		Qt-notepad/Actions-edit-cut-icon.png \
 		Qt-notepad/libreoffice-main.png \
-		Qt-notepad/libreoffice-oasis-presentation-template.png \
-		Qt-notepad/preferences-desktop-font.png
+		Qt-notepad/copy-icon.png \
+		Qt-notepad/undo-icon.png \
+		Qt-notepad/Save-icon.png \
+		Qt-notepad/Paste-icon.png \
+		Qt-notepad/Redo-icon.png \
+		Qt-notepad/preferences-desktop-font.png \
+		Qt-notepad/Button-Close-icon.png \
+		Qt-notepad/Info-icon.png
 	/home/aaron/Qt/5.2.0/gcc/bin/rcc -name Recursos Qt-notepad/Recursos.qrc -o qrc_Recursos.cpp
 
 compiler_moc_header_make_all: moc_notepadwindow.cpp

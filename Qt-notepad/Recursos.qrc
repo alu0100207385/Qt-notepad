@@ -1,7 +1,15 @@
 <RCC>
     <qresource prefix="/new/prefix1">
-        <file>libreoffice-oasis-presentation-template.png</file>
         <file>libreoffice-main.png</file>
         <file>preferences-desktop-font.png</file>
+        <file>Paste-icon.png</file>
+        <file>copy-icon.png</file>
+        <file>Folder-Open-icon.png</file>
+        <file>Actions-edit-cut-icon.png</file>
+        <file>Save-icon.png</file>
+        <file>undo-icon.png</file>
+        <file>Redo-icon.png</file>
+        <file>Button-Close-icon.png</file>
+        <file>Info-icon.png</file>
     </qresource>
 </RCC>

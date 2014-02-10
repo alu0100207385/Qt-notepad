@@ -31,16 +31,16 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     setMenuBar(mainMenu_);
 
     //Instanciamos una var para abrir
-    actArchivoAbrir_ = new QAction(QIcon(":/new/prefix1/libreoffice-main.png"),tr("&Abrir"),this);
+    actArchivoAbrir_ = new QAction(QIcon(":/new/prefix1/Folder-Open-icon.png"),tr("&Abrir"),this);
     actArchivoAbrir_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     mnuArchivo_->addAction(actArchivoAbrir_);
 
     //Instanciamos una var para guardar
-    actArchivoGuardar_ = new QAction(tr("&Guardar"),this);
+    actArchivoGuardar_ = new QAction(QIcon(":/new/prefix1/Save-icon.png"),tr("&Guardar"),this);
     actArchivoGuardar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_G));
     mnuArchivo_->addAction(actArchivoGuardar_);
 
-    actArchivoSalir_ = new QAction(tr("&Salir"),this);
+    actArchivoSalir_ = new QAction(QIcon(":/new/prefix1/Button-Close-icon.png"),tr("&Salir"),this);
     actArchivoSalir_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     mnuArchivo_->addAction(actArchivoSalir_);
 
@@ -48,23 +48,23 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     mnuEditar_ = new QMenu(tr("&Editar"));
     mainMenu_->addMenu(mnuEditar_);
 
-    actEditarDeshacer_ = new QAction(tr("&Deshacer"), this);
+    actEditarDeshacer_ = new QAction(QIcon(":/new/prefix1/undo-icon.png"),tr("&Deshacer"), this);
     actEditarDeshacer_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
     mnuEditar_->addAction(actEditarDeshacer_);
 
-    actEditarRehacer_ = new QAction(tr("&Rehacer"), this);
+    actEditarRehacer_ = new QAction(QIcon(":/new/prefix1/Redo-icon.png"),tr("&Rehacer"), this);
     actEditarRehacer_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
     mnuEditar_->addAction(actEditarRehacer_);
 
-    actEditarCortar_ = new QAction(tr("&Cortar"), this);
+    actEditarCortar_ = new QAction(QIcon(":/new/prefix1/Actions-edit-cut-icon.png"),tr("&Cortar"), this);
     actEditarCortar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_X));
     mnuEditar_->addAction(actEditarCortar_);
 
-    actEditarCopiar_ = new QAction(tr("&Copiar"), this);
+    actEditarCopiar_ = new QAction(QIcon(":/new/prefix1/copy-icon.png"),tr("&Copiar"), this);
     actEditarCopiar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_C));
     mnuEditar_->addAction(actEditarCopiar_);
 
-    actEditarPegar_ = new QAction(tr("&Pegar"), this);
+    actEditarPegar_ = new QAction(QIcon(":/new/prefix1/Paste-icon.png"),tr("&Pegar"), this);
     actEditarPegar_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_V));
     mnuEditar_->addAction(actEditarPegar_);
 
@@ -80,7 +80,7 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     mnuAyuda_ = new QMenu(tr("A&yuda"));
     mainMenu_->addMenu(mnuAyuda_);
 
-    actAyudaAcerca_ = new QAction(tr("Acerca de"), this);
+    actAyudaAcerca_ = new QAction(QIcon(":/new/prefix1/Info-icon.png"),tr("Acerca de"), this);
     actAyudaAcerca_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_F1));
     mnuAyuda_->addAction(actAyudaAcerca_);
 
@@ -104,19 +104,19 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     addToolBar(mnuToolBar_);
 
     //TOOLBAR
-    actToolBarAbrir_ = new QAction(tr("Abrir"),this);
+    actToolBarAbrir_ = new QAction(QIcon(":/new/prefix1/Folder-Open-icon.png"),tr("Abrir"),this);
     mnuToolBar_->addAction(actToolBarAbrir_);
     connect(actToolBarAbrir_, SIGNAL(triggered()), this, SLOT(alAbrir()));
 
-    actToolBarCopiar_ = new QAction(tr("Copiar"),this);
+    actToolBarCopiar_ = new QAction(QIcon(":/new/prefix1/copy-icon.png"),tr("Copiar"),this);
     mnuToolBar_->addAction(actToolBarCopiar_);
     connect(actToolBarCopiar_, SIGNAL(triggered()), txtEditor_, SLOT(copy()));
 
-    actToolBarCortar_ = new QAction(tr("Cortar"),this);
+    actToolBarCortar_ = new QAction(QIcon(":/new/prefix1/Actions-edit-cut-icon.png"),tr("Cortar"),this);
     mnuToolBar_->addAction(actToolBarCortar_);
     connect(actToolBarCortar_, SIGNAL(triggered()), txtEditor_, SLOT(cut()));
 
-    actToolBarPegar_ = new QAction(tr("Pegar"),this);
+    actToolBarPegar_ = new QAction(QIcon(":/new/prefix1/Paste-icon.png"),tr("Pegar"),this);
     mnuToolBar_->addAction(actToolBarPegar_);
     connect(actToolBarPegar_, SIGNAL(triggered()), txtEditor_, SLOT(paste()));
 
@@ -227,7 +227,14 @@ void NotepadWindow::alFuente()
 
 void NotepadWindow::alCursiva()
 {
-    txtEditor_->setFont(QFontDialog::getFont(0, txtEditor_->font()));
+    QTextEdit* aux;
+    aux = new QTextEdit(this);
+    aux->setFontItalic(true);
+/*    bool ok=true;
+    QFont font = QFontDialog::getFont(xt&ok, txtEditor_->font(), this);
+    txtEditor_->setItalic(font);
+    //txtEditor_->setFont(QFontDialog::getFont(0, txtEditor_->font()));
+    */
 }
 
 void NotepadWindow::alAcercaDe()
