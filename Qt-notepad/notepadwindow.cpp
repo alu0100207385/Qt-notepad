@@ -126,9 +126,18 @@ NotepadWindow::NotepadWindow(QWidget *parent)
     mnuToolBar_->addAction(actToolBarFuente_);
     connect(actToolBarFuente_, SIGNAL(triggered()), this, SLOT(alFuente()));
 
-    actToolBarCursiva_ = new QAction(tr("Cursiva"),this);
+    actToolBarNegrita_ = new QAction(QIcon(":/new/prefix1/text-bold-icon.png"),tr("Negrita"),this);
+    mnuToolBar_->addAction(actToolBarNegrita_);
+    connect(actToolBarNegrita_, SIGNAL(triggered()), this, SLOT(alNegrita()));
+
+    actToolBarCursiva_ = new QAction(QIcon(":/new/prefix1/text-italic-icon.png"),tr("Cursiva"),this);
     mnuToolBar_->addAction(actToolBarCursiva_);
     connect(actToolBarCursiva_, SIGNAL(triggered()), this, SLOT(alCursiva()));
+
+    actToolBarSubrayado_ = new QAction(QIcon(":/new/prefix1/text-underline-icon.png"),tr("Subrayado"),this);
+    mnuToolBar_->addAction(actToolBarSubrayado_);
+    connect(actToolBarSubrayado_, SIGNAL(triggered()), this, SLOT(alSubrayado()));
+
 }
 
 NotepadWindow::~NotepadWindow()
@@ -159,7 +168,9 @@ NotepadWindow::~NotepadWindow()
     actToolBarPegar_->deleteLater();
     actToolBarFuente_->deleteLater();
 
+    actToolBarNegrita_->deleteLater();
     actToolBarCursiva_->deleteLater();
+    actToolBarSubrayado_->deleteLater();
 }
 
 
@@ -179,8 +190,8 @@ void NotepadWindow::alAbrir()
         if (archivo.open(QFile::ReadOnly))
         {
             //Si se pudo abrrir el archivo, lo leemos y lo colocamos
-            txtEditor_->setPlainText(archivo.readAll());
-
+            //txtEditor_->setPlainText(archivo.readAll());
+            txtEditor_->setText(archivo.readAll());
             //Se cierra el fichero
             archivo.close();
         }
@@ -226,26 +237,61 @@ void NotepadWindow::alFuente()
     }
 }
 
+void NotepadWindow::alNegrita()
+{
+    QTextDocument *document = txtEditor_->document();
+    QTextCursor cursor(document);
+
+    cursor.movePosition(QTextCursor::Start);
+    cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+
+    QTextCharFormat format;
+    if (format.fontWeight()==75)
+        format.setFontWeight(QFont::Normal);
+    if (format.fontWeight()==50)
+        format.setFontWeight(QFont::Bold);
+
+    cursor.mergeCharFormat(format);
+}
+
 void NotepadWindow::alCursiva()
 {
+    QTextDocument *document = txtEditor_->document();
+    QTextCursor cursor(document);
 
-    QTextEdit* aux;
-    aux = new QTextEdit(this);
-    aux->setFontItalic(true);
+    cursor.movePosition(QTextCursor::Start);
+    cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
 
-/*    bool ok=true;
-    QFont font = QFontDialog::getFont(&ok, txtEditor_->font(), this);
-    txtEditor_->setItalic(font);
-    //txtEditor_->setFont(QFontDialog::getFont(0, txtEditor_->font()));
-    */
+    QTextCharFormat format;
+    format.setFontWeight(QFont::Cursive);
+
+    cursor.mergeCharFormat(format);
+}
+
+
+void NotepadWindow::alSubrayado()
+{
+    QTextDocument *document = txtEditor_->document();
+    QTextCursor cursor(document);
+
+    cursor.movePosition(QTextCursor::Start);
+    cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+
+    QTextCharFormat format;
+    if (format.fontUnderline())
+        format.setUnderlineStyle(QTextCharFormat::NoUnderline);
+    else
+        format.setUnderlineStyle(QTextCharFormat::SingleUnderline);
+
+    cursor.mergeCharFormat(format);
 }
 
 void NotepadWindow::alAcercaDe()
 {
     QMessageBox msg(this);
-//    msg.setWindowTitle(tr("Acerca de"));
+    msg.setWindowTitle(tr("Acerca de"));
     msg.setText("<p>NotePad's Aaron (in Qt!)</p><p>v 1.0</p>");
-//    msg.addButton("Aceptar",QMessageBox::AcceptRole);
+    msg.addButton("Aceptar",QMessageBox::AcceptRole);
 
     if (msg.exec())
         close();
@@ -259,11 +305,19 @@ void NotepadWindow::alSalir()
     msg.addButton("Si",QMessageBox::YesRole);
     msg.addButton("No",QMessageBox::NoRole);
 
+    QMessageBox msg2(this);
+    msg2.setInformativeText("¿Desea guardar el documento actual?");
+    msg2.addButton("Si",QMessageBox::YesRole);
+    msg2.addButton("No",QMessageBox::NoRole);
+
     if (!msg.exec())
+    {
+        if (!msg2.exec())
+            alGuardar();
         close();
+    }
+
     //Muestra el valor de salida
-//    qDebug() << msg.exec();
+    //    qDebug() << msg.exec();
 }
-
-
 

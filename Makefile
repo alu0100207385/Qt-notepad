@@ -443,17 +443,20 @@ compiler_rcc_make_all: qrc_Recursos.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_Recursos.cpp
 qrc_Recursos.cpp: Qt-notepad/Recursos.qrc \
-		Qt-notepad/Folder-Open-icon.png \
-		Qt-notepad/Actions-edit-cut-icon.png \
-		Qt-notepad/libreoffice-main.png \
+		Qt-notepad/preferences-desktop-font.png \
+		Qt-notepad/Info-icon.png \
+		Qt-notepad/Button-Close-icon.png \
+		Qt-notepad/text-bold-icon.png \
+		Qt-notepad/Paste-icon.png \
 		Qt-notepad/copy-icon.png \
+		Qt-notepad/text-italic-icon.png \
+		Qt-notepad/libreoffice-main.png \
+		Qt-notepad/Folder-Open-icon.png \
 		Qt-notepad/undo-icon.png \
 		Qt-notepad/Save-icon.png \
-		Qt-notepad/Paste-icon.png \
+		Qt-notepad/Actions-edit-cut-icon.png \
 		Qt-notepad/Redo-icon.png \
-		Qt-notepad/preferences-desktop-font.png \
-		Qt-notepad/Button-Close-icon.png \
-		Qt-notepad/Info-icon.png
+		Qt-notepad/text-underline-icon.png
 	/home/aaron/Qt/5.2.0/gcc/bin/rcc -name Recursos Qt-notepad/Recursos.qrc -o qrc_Recursos.cpp
 
 compiler_moc_header_make_all: moc_notepadwindow.cpp
@@ -585,6 +588,7 @@ moc_notepadwindow.cpp: ../../Qt/5.2.0/gcc/include/QtWidgets/QMainWindow \
 		../../Qt/5.2.0/gcc/include/QtGui/qglyphrun.h \
 		../../Qt/5.2.0/gcc/include/QtGui/qrawfont.h \
 		../../Qt/5.2.0/gcc/include/QtGui/qfontdatabase.h \
+		../../Qt/5.2.0/gcc/include/QtWidgets/QTextEdit \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QMenu \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qmenu.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qaction.h \
@@ -752,6 +756,7 @@ main.o: Qt-notepad/main.cpp Qt-notepad/notepadwindow.h \
 		../../Qt/5.2.0/gcc/include/QtGui/qglyphrun.h \
 		../../Qt/5.2.0/gcc/include/QtGui/qrawfont.h \
 		../../Qt/5.2.0/gcc/include/QtGui/qfontdatabase.h \
+		../../Qt/5.2.0/gcc/include/QtWidgets/QTextEdit \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QMenu \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qmenu.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qaction.h \
@@ -911,6 +916,7 @@ notepadwindow.o: Qt-notepad/notepadwindow.cpp Qt-notepad/notepadwindow.h \
 		../../Qt/5.2.0/gcc/include/QtGui/qglyphrun.h \
 		../../Qt/5.2.0/gcc/include/QtGui/qrawfont.h \
 		../../Qt/5.2.0/gcc/include/QtGui/qfontdatabase.h \
+		../../Qt/5.2.0/gcc/include/QtWidgets/QTextEdit \
 		../../Qt/5.2.0/gcc/include/QtWidgets/QMenu \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qmenu.h \
 		../../Qt/5.2.0/gcc/include/QtWidgets/qaction.h \

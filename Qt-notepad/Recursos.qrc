@@ -11,5 +11,8 @@
         <file>Redo-icon.png</file>
         <file>Button-Close-icon.png</file>
         <file>Info-icon.png</file>
+        <file>text-bold-icon.png</file>
+        <file>text-italic-icon.png</file>
+        <file>text-underline-icon.png</file>
     </qresource>
 </RCC>

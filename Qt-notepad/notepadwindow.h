@@ -44,7 +44,9 @@ private slots:
     void alFuente();
     void alAcercaDe();
     void alSalir();
+    void alNegrita();
     void alCursiva();
+    void alSubrayado();
 
 public:
     NotepadWindow(QWidget *parent = 0);
@@ -87,7 +89,9 @@ private:
     QAction* actToolBarPegar_;
     QAction* actToolBarFuente_;
 
+    QAction* actToolBarNegrita_;
     QAction* actToolBarCursiva_;
+    QAction* actToolBarSubrayado_;
 };
 
 #endif // NOTEPADWINDOW_H
